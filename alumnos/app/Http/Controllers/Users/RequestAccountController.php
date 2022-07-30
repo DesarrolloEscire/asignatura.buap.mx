@@ -1,0 +1,66 @@
+<?php
+
+namespace App\Http\Controllers\Users;
+
+use App\Http\Controllers\Controller;
+use App\Mail\UserRegisteredMail;
+use App\Models\Role;
+use App\Models\Student;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Str;
+
+class RequestAccountController extends Controller
+{
+    public function __invoke(Request $request)
+    {
+        $email = "$request->email@alumno.buap.mx";
+
+        if (Student::where('identifier', $request->identifier)->exists()) {
+            Alert::error('El identificador ya se encuentra en la base de datos de docentes');
+            return redirect()->back();
+        }
+
+        $student = new Student();
+        $student->name = strtoupper($request->name);
+        $student->identifier = $request->identifier;
+        $student->email = $email;
+
+        $student->save();
+
+        if (User::whereIdentifier($request->identifier)->verified()->exists()) {
+            Alert::error('Ya se encuentra un usuario registrado con el identificador solicitado');
+            return redirect()->back();
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            Alert::error("Error", "El correo electrónico ingresado: $email no es un correo válido. Por favor, vuelve a intentarlo");
+            return redirect()->back();
+        }
+
+        if (User::whereNotIdentifier($request->identifier)->whereEmail($email)->exists()) {
+            Alert::error('Ya existe una cuenta con el correo ingresado.');
+            return redirect()->back();
+        }
+
+        $password = Str::random();        
+        
+        $user = User::firstOrCreate([
+            'identifier' => $request->identifier
+        ], [
+            'name' => strtoupper($request->name),
+            'email' => $email,
+            'password' => bcrypt($password),
+        ])->assignRole(Role::STUDENT_ROLE);
+
+        $user->academicUnits()->sync([$request->academic_unit_id]);
+
+        Mail::to($user->email)
+            ->send(new UserRegisteredMail($user, $password));
+
+        Alert::success('El usuario ha sido registrado correctamente.', 'por favor, revisa tu bandeja de correos electronicos para verificar tu cuenta');
+        return redirect()->route('login');
+    }
+}

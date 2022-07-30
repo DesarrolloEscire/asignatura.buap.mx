@@ -1,0 +1,106 @@
+// Variables
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.poppins-font, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+}
+
+.nunito-font {
+    font-family: 'Nunito', sans-serif;
+}
+
+@import 'variables.scss';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// Import Custom SB Admin 2 Mixins and Components
+@import "mixins.scss";
+@import "global.scss";
+@import "utilities.scss";
+
+// Custom Components
+@import "dropdowns.scss";
+@import "navs.scss";
+@import "buttons.scss";
+@import "cards.scss";
+@import "charts.scss";
+@import "login.scss";
+@import "error.scss";
+@import "footer.scss";
+
+.kt-card{
+    @extend .card;
+    @extend .border-0;
+    @extend .shadow;
+}
+
+.kt-table-responsive {
+    border-top: 3px solid;
+    border-color: $primary;
+    @extend .bg-white;
+    @extend .shadow;
+}
+
+.kt-table {
+    @extend .table;
+    @extend .table-hover;
+}
+
+.kt-border-left{
+    border-left: 5px solid;
+}
+
+.kt-border-secondary{
+    border-color: $secondary;
+}
+
+.kt-border-red{
+    border-color: #ff6464;
+}
+
+.text-black{
+    color: black;
+}
+
+/* 
+    =================
+    SCROLLBAR
+    =================
+    */
+
+/* width */
+div::-webkit-scrollbar,
+::-webkit-scrollbar {
+    width: 13px;
+    height: 7px;
+}
+
+/* Track */
+div::-webkit-scrollbar-track,
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px white;
+}
+
+/* Handle */
+div::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb {
+    background: $gray-300;
+}
+
+/* Handle on hover */
+div::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:hover {
+    background: $gray-400;
+}
+
+@import '~select2/dist/css/select2.css';

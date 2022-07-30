@@ -1,0 +1,74 @@
+.title-text {
+    font-weight: 700;
+}
+
+
+.blue-background {
+    background-color: #003b5c !important;
+    border: solid 1px #003b5c !important;
+    color: white;
+}
+
+.light-blue-background {
+    background-color: #26a1dc !important;
+    border: solid 1px #26a1dc !important;
+    color: white;
+}
+
+.blue-text {
+    color: #003b5c;
+}
+
+.banner-section {
+    width: 100%;
+    height: auto;
+}
+
+#carouselBanners {
+    width: 100% !important;
+    height: auto !important;
+}
+
+.carousel-inner {
+    background: url('/img/dashboard/others/carousel-background.jpg') center fixed no-repeat;
+    background-color: #003b5cde;
+    width: 100% !important;
+    height: auto !important;
+}
+
+.background-img {
+    width: 100% !important;
+    height: auto !important;
+}
+
+.row-section {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.btn-circle {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    min-width: 90px;
+    min-height: 90px;
+    width: 120px;
+    height: 120px;
+    max-width: 120px;
+    max-height: 120px;
+    color: white !important;
+    background-color: lightgray;
+    border: solid 1px lightgray;
+    border-radius: 50%;
+    margin: 10px auto;
+    text-decoration: none !important;
+}
+
+.btn-circle i {
+    margin: auto;
+    font-size: 40px;
+}
+
+.btn-circle:hover i {
+    font-size: 45px;
+}
